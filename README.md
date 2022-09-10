@@ -3,8 +3,7 @@
 
 Simple - Input Youtube Url, choose format and the video will be downloaded.
 
-This repo is just the source, you can build directly from source. 
-
+This repo is just the source code, you can build directly from it. 
 Tested only on Windows 10 but should work bug free on unix and unix-like systems.
 
 Trying to support as much video formats as possible

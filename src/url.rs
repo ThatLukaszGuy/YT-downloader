@@ -105,7 +105,7 @@ impl YoutubeUrl {
 
         
         for link in self.download_url_list {
-            // only for mp4 files for now
+            // only for mp4 files for now, sadly this looks like since enums can't store literals for now, so it has tobe implemented this way :/
             if link.contains("itag=18") {
                 available_formats.push((Formats::MP4_360, link.clone()))
             }

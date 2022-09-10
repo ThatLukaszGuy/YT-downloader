@@ -51,7 +51,7 @@ async fn main() -> Result<()> {
     });
 
     let loading = Loading::default();
-    loading.text("Downloading file, this may take a few minutes depending on video length, format and quality.");
+    loading.text("Downloading file, this may take a few minutes depending on video length, format and quality. - Don't cancel this process!");
     
     if let Answer::ListItem(ListItem { index: _, text}) = answer {
         let download_link_and_format: Vec<(Formats, String)> = list
