@@ -51,7 +51,7 @@ async fn main() -> Result<()> {
     });
 
     let loading = Loading::default();
-    loading.text("Downloading file, this may take a few minutes depending on video length, format and quality. - Don't cancel this process!");
+    println!("{}", "Downloading file, this may take a few minutes depending on video length, format and quality. - Don't cancel this process!".yellow().bold().italic());
     
     if let Answer::ListItem(ListItem { index: _, text}) = answer {
         let download_link_and_format: Vec<(Formats, String)> = list
@@ -65,10 +65,15 @@ async fn main() -> Result<()> {
             process::exit(1);
         }
         // fetch and download
-        if download_link_and_format[0].0.to_string().contains("MP4") {
-            fetch_url(download_link_and_format[0].1.clone(), title, ".mp4").await.expect("\nCould not download URL from created link");
-        } else if download_link_and_format[0].0.to_string().contains("WEBM") {
-            fetch_url(download_link_and_format[0].1.clone(), title, ".webm").await.expect("\nCould not download URL from created link");
+        match download_link_and_format[0].0.to_string() {
+            s if s.contains("3GP") => fetch_url(download_link_and_format[0].1.clone(), title, ".3gp").await.expect("\nCould not download URL from created link"),
+            s if s.contains("FLV") => fetch_url(download_link_and_format[0].1.clone(), title, ".flv").await.expect("\nCould not download URL from created link"),
+            s if s.contains("MP4") => fetch_url(download_link_and_format[0].1.clone(), title, ".mp4").await.expect("\nCould not download URL from created link"),
+            s if s.contains("HLS") => fetch_url(download_link_and_format[0].1.clone(), title, ".hls").await.expect("\nCould not download URL from created link"),
+            s if s.contains("WEBM") => fetch_url(download_link_and_format[0].1.clone(), title, ".webm").await.expect("\nCould not download URL from created link"),
+            s if s.contains("M4A") => fetch_url(download_link_and_format[0].1.clone(), title, ".m4a").await.expect("\nCould not download URL from created link"),
+            
+            _ => ()
         }
 
         loading.end()

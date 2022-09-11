@@ -8,6 +8,8 @@ use crate::helpers::{
     clean_up::clean_up_files,
     errortext::show
 };
+use strum::IntoEnumIterator;
+
 
 #[derive( Clone)]
 pub struct YoutubeUrl {
@@ -15,6 +17,7 @@ pub struct YoutubeUrl {
     path: String,
     pub available_formats: Vec<(Formats, String)>
 }
+
 impl YoutubeUrl {
     
     pub async fn new(input: &str) -> Result<YoutubeUrl, Box<dyn std::error::Error>>  {
@@ -102,39 +105,29 @@ impl YoutubeUrl {
     pub fn get_formats(mut self) -> Vec<(Formats, std::string::String)> {
         
         let mut available_formats: Vec<(Formats,String)> = Vec::new();
-
+        
+        // IMPORTANT -> same order as corresponding format
+        let itag_codes: Vec<&str> = vec!["No link", "17", "36" , "5", "6","34","35", "18",
+                                        "22","37","38","82","83","84","85","92","93","94",
+                                        "95","96","43", "44","45","46","171","249","250","251",
+                                        "139","140","141"];
+        
+        let mut count = 0;
         
         for link in self.download_url_list {
-            // only for mp4 files for now, sadly this looks like since enums can't store literals for now, so it has tobe implemented this way :/
-            if link.contains("itag=18") {
-                available_formats.push((Formats::MP4_360, link.clone()))
-            }
-            if link.contains("itag=22") {
-                available_formats.push((Formats::MP4_720,link.clone()))
-            }
+            
+            for format in Formats::iter() {
+                
+                let tag = format!("itag={}",itag_codes[count]);
+                if link.contains(&tag) {
+                    available_formats.push((format, link.clone()));
+                }
 
-            if link.contains("itag=37") {
-                available_formats.push((Formats::MP4_1080,link.clone()))
-            }
-
-            if link.contains("itag=38") {
-                available_formats.push((Formats::MP4_3072,link.clone()))
-            }
-
-            if link.contains("itag=82") {
-                available_formats.push((Formats::MP4_360_3D,link.clone()))
-            }
-
-            if link.contains("itag=83") {
-                available_formats.push((Formats::MP4_480_3D,link.clone()))
-            }
-
-            if link.contains("itag=84") {
-                available_formats.push((Formats::MP4_720_3D,link.clone()))
-            }
-
-            if link.contains("itag=85") {
-                available_formats.push((Formats::MP4_1080_3D,link.clone()))
+                count = count + 1;
+                // so index doesn't go out of bounds
+                if count == itag_codes.len() {
+                    count = 0;
+                }
             }
             
         }
