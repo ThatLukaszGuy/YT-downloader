@@ -1,22 +1,20 @@
-use loading::Loading;
 use tokio::{
     io::AsyncWriteExt,
     fs::File
 };
-use colored::*;
 use tokio_stream::StreamExt;
 
 
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error + Send + Sync>>;
 
-pub async fn fetch_url(url: String, file_name: String, format: &str) -> Result<()> {
+pub async fn fetch_url(url: &str, file_name: String, format: &str) -> Result<String> {
 
 
 
     let x = format!("{}{}{}", "ready_video_output/", file_name, format); // for now since its just mp4 files
     
     let mut file = File::create(&x).await?;
-    let mut stream = reqwest::get(url)
+    let mut stream = reqwest::get(url.to_owned())
     .await?
     .bytes_stream();
 
@@ -34,11 +32,8 @@ pub async fn fetch_url(url: String, file_name: String, format: &str) -> Result<(
         "\\ready_video_output\\",
         file_name,
         format);
-    let loading = Loading::default();
-
-    loading.success(format!("{} {}","Downloaded Successfully at".green().bold(), vid_location.green().bold() ));
     
-    Ok(loading.end())
+    Ok(vid_location)
 }
 
 

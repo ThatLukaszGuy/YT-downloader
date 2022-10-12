@@ -3,6 +3,7 @@ use strum_macros::EnumIter;
 #[derive(Debug)]
 #[derive(Copy,Clone, EnumIter)]
 #[allow(non_camel_case_types)]
+#[derive(PartialEq)]
 pub enum Formats {
     NO_URL, // in case of no format being available
     // 3gp
