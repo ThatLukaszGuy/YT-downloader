@@ -5,3 +5,4 @@ pub mod clean_up;
 pub mod dir_checks;
 pub mod fetch;
 pub mod errortext;
+pub mod loadimg;
