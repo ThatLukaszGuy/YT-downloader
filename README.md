@@ -22,8 +22,7 @@ A Simple Youtube Video Downloader App.
 
 Just Install it , pick out a video , input url and title (can be whatever u want), choose an available format, and simply click the ``download`` button. 
 
-This repo is just the source code, you can build directly from it. 
-Tested only on Windows 10 but should work bug free on unix and unix-like systems.
+This repo contains the source code, you can build directly from it. It also has a zipped ready version for windows systems. Building from source should allow to run the app on all platforms.
 
 Trying to support as much video formats as possible, currently only the formats below are supported:
 
