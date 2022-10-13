@@ -13,7 +13,7 @@
       - [Without rust installed](#without-rust-installed)
 - [Addidtional info](#addidtional-info)
 - [Screenshots / Demo](#screenshots--demo)
-- [License](#license)
+- [Disclaimer](#disclaimer)
 - [Authors](#authors)
 
 
@@ -81,11 +81,11 @@ Other:
 
 ![App Screenshot](readme_assets/screen_done.png)
 
-## License
+## Disclaimer
 
-Distributed under the MIT License.
+This project was made purely with the intention of learning rust and other educational purposes. The responsibilty regarding what happens to any downloaded content is purely on the side of the end user. As such use it at your own risk. The author holds no responsibilty regarding the use of the tool.
 
-All Rights to any downloaded files still belong to YouTube.
+All Rights to any downloaded files still belong to YouTube. 
 
 ## Authors
 
