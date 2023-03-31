@@ -9,6 +9,7 @@ use eframe::egui;
 use super::url::YoutubeUrl;
 use std::sync::mpsc::{Receiver, Sender};
 
+use egui::Color32;
 
 pub struct DownloaderApp {
     tx: Sender<YoutubeUrl>,
@@ -79,6 +80,8 @@ impl eframe::App for DownloaderApp {
             self.path = str;
             self.finished = true
         }
+
+
 
         // footer with loader
         egui::TopBottomPanel::bottom("finished").show(ctx, |ui| {
@@ -152,6 +155,28 @@ impl eframe::App for DownloaderApp {
                 }       
             });
 
+            let faded_color = ui.visuals().window_fill();
+            let faded_color = |color: Color32| -> Color32 {
+                use egui::Rgba;
+                let t = 0.8;
+                egui::lerp(Rgba::from(color)..=Rgba::from(faded_color), t).into()
+            };
+
+            ui.painter().rect_filled(
+                ui.available_rect_before_wrap(),
+                10.0,
+                faded_color(Color32::DARK_GRAY),
+            );
+            ui.colored_label(Color32::from_rgb(128, 140, 255), 
+            " 
+    Little Help:\n
+    _VIDEO:  Video will be downloaded without audio
+    HDR:  Hdr format
+    Appended number (e.g. _2, _3, etc):  Same video format
+    corresponds to multiple itags available for chosen video
+            "
+            ); 
+
         });
 
     }
@@ -193,4 +218,3 @@ fn download(tx_download: Sender<String>,ctx: egui::Context, format: (Formats, St
         ctx.request_repaint();    
     });
 }
-

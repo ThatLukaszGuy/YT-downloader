@@ -2,7 +2,7 @@
 <p align="center">
   <img align="center" src="/downloader_img_assets/logo.jpg" alt="Logo" width="80" height="80">
   <h1 align="center">YT-Downloader</h1>
-  <p align="center">For everyone.</p>
+  <p align="center">For everyone. (Well mostly)</p>
 </p>
 
 - [About](#about)

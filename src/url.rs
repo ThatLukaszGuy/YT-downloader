@@ -11,7 +11,7 @@ use crate::helpers::{
 use strum::IntoEnumIterator;
 
 
-#[derive( Clone)]
+#[derive(Clone)]
 pub struct YoutubeUrl {
     download_url_list: Vec<String>,
     path: String,
@@ -55,7 +55,7 @@ impl YoutubeUrl {
     pub fn extract_valid_link_list(&mut self) {
         // read contents of file to var
         let first_extract = std::fs::read_to_string(&self.path).unwrap_or_else(|_x|{
-            show("Could not read temporary file.. Maybe try running as administrator?");
+            show("Could not read from temporary file.. Maybe try running as administrator?");
             process::exit(1);
         });
         // place \n before all http lines
@@ -91,7 +91,7 @@ impl YoutubeUrl {
         
         for line in std::fs::read_to_string(&self.path)
         .unwrap_or_else(|_x|{
-            show("Could not write to temporary file.. Maybe try running as administrator?");
+            show("Could not read from temporary file.. Maybe try running as administrator?");
             process::exit(1);
         })
         .lines() {
@@ -107,10 +107,18 @@ impl YoutubeUrl {
         let mut available_formats: Vec<(Formats,String)> = Vec::new();
         
         // IMPORTANT -> same order as corresponding format
-        let itag_codes: Vec<&str> = vec!["No link", "17", "36" , "5", "6","34","35", "18",
-                                        "22","37","38","82","83","84","85","92","93","94",
-                                        "95","96","43", "44","45","46","171","249","250","251",
-                                        "139","140","141"];
+        let itag_codes: Vec<&str> = vec![
+        "No link", 
+        "17", "36" , 
+        "5", "6","34","35", 
+        "160","18","22","37","38","82","83","84","85", "133","134", "135" , "136","298", "137","299","399", "264", "400","138", "266","401","402",
+        "151","92","93","94","95","96", "132",
+        "43", "44","45","46", "100", "101", "102", "219", "278","330","242", "167", "243", "168", "218", "244", "245", "246", "247", "302","248", "303","271", "308", "313", "315" ,"272",
+        "171","249","250","251",
+        "331","332", "333", "334", "335", "336", "337",
+        "139","140","141"
+        
+        ];
         
         let mut count = 0;
         
