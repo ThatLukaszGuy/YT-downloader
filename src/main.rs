@@ -23,7 +23,7 @@ async fn main() -> Result<()> {
     let native_options = eframe::NativeOptions {
         resizable: false,
         initial_window_size: Some(egui::Vec2 { x: 350.0, y: 400.0 }),
-        icon_data: Some(load_icon(".\\downloader_img_assets\\logo.jpg")), 
+        //icon_data: Some(load_icon(".\\downloader_img_assets\\logo.jpg")), 
         ..Default::default()
     };
 

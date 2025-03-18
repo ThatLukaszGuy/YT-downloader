@@ -2,7 +2,6 @@
 <p align="center">
   <img align="center" src="/downloader_img_assets/logo.jpg" alt="Logo" width="80" height="80">
   <h1 align="center">YT-Downloader</h1>
-  <p align="center">For everyone. (Well mostly)</p>
 </p>
 
 - [About](#about)
@@ -22,7 +21,7 @@ A Simple Youtube Video Downloader App.
 
 Just Install it , pick out a video , input url and title (can be whatever u want), choose an available format, and simply click the ``download`` button. 
 
-This repo contains the source code, you can build directly from it. It also has a zipped ready version for windows systems. Building from source should allow to run the app on all platforms.
+This repo contains the source code, you can build directly from it. It also has a zipped ready version for windows systems. Works only on Windows for now
 
 Trying to support as much video formats as possible, currently only the formats below are supported:
 
@@ -42,7 +41,7 @@ Make user choose format and sends an http request to the url. File begins downlo
 ## Install
 Both are very straightforward
 ##### With rust installed
-- Can be build from linux/windows/mac
+- Can be build from windows
 
 clone repo
 ```cargo run```
